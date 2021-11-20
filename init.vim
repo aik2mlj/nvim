@@ -29,6 +29,8 @@ set listchars=tab:\|\ ,trail:▫
 " can move to void in virtual mode
 set virtualedit=block
 
+map Q gq
+
 " set <LEADER> as <SPACE>
 let mapleader=" "
 
@@ -97,9 +99,17 @@ noremap sv <C-w>t<C-w>H
 noremap tt :tabe<CR>
 noremap tT :tab split<CR>
 " Move around tabs with tn and ti
-noremap th :-tabnext<CR>
-noremap tl :+tabnext<CR>
+noremap tk :tabp<CR>
+noremap tj :tabn<CR>
 " Move the tabs with tmn and tmi
-noremap tmh :-tabmove<CR>
-noremap tml :+tabmove<CR>
+noremap th :tabm -1<CR>
+noremap tl :tabm +1<CR>
+" Switch to last-active tab (copy from stackoverflow)
+if !exists('g:Lasttab')
+    let g:Lasttab = 1
+    let g:Lasttab_backup = 1
+endif
+autocmd! TabLeave * let g:Lasttab_backup = g:Lasttab | let g:Lasttab = tabpagenr()
+autocmd! TabClosed * let g:Lasttab = g:Lasttab_backup
+noremap <LEADER>t :exe "tabn " . g:Lasttab<cr>
 
