@@ -96,6 +96,14 @@ noremap <silent> L $
 noremap <silent> J 5j
 noremap <silent> K 5k
 
+" exchange lines
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+inoremap <M-j> <ESC>:m .+1<CR>==gi
+inoremap <M-k> <ESC>:m .-2<CR>==gi
+xnoremap <M-j> :m'>+<CR>==gv
+xnoremap <M-k> :m-2<CR>==gv
+
 " ================
 " Window Management
 " ================
