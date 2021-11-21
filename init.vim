@@ -28,6 +28,8 @@ set list
 set listchars=tab:\|\ ,trail:▫
 " can move to void in virtual mode
 set virtualedit=block
+set mouse=a
+set clipboard+=unnamedplus
 
 map Q gq
 
@@ -49,10 +51,14 @@ hi LineNr ctermfg=grey guifg=grey
 
 " save and quit
 nnoremap <LEADER>q :q<CR>
-nnoremap <LEADER>s :w<CR>
+nnoremap <LEADER>Q :q!<CR>
+nnoremap <LEADER>w :w<CR>
 nnoremap <C-q> :q!<CR>
 inoremap <C-q> <ESC>:q!<CR>
 inoremap <C-s> <ESC>:w<CR>
+
+" no highlight
+noremap <LEADER>h :nohls<CR>
 
 " redo
 nnoremap U <C-r>
@@ -62,38 +68,58 @@ noremap <silent> H ^
 noremap <silent> L $
 noremap <silent> J 5j
 noremap <silent> K 5k
-noremap <C-j> J
-noremap <C-k> K
 
-" Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
-noremap <LEADER>k <C-w>k
-noremap <LEADER>j <C-w>j
-noremap <LEADER>h <C-w>h
-noremap <LEADER>l <C-w>l
-noremap <LEADER>o <C-w>o
+" change join
+noremap <LEADER>j J
 
-" disable s
-noremap s <nop>
+" exchange lines
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+inoremap <M-j> <ESC>:m .+1<CR>==gi
+inoremap <M-k> <ESC>:m .-2<CR>==gi
+
+" ================
+" Window Management
+" ================
+
+" Use ; + new arrow keys for moving the cursor around windows
+noremap <C-f> <C-w>w
+noremap <C-k> <C-w>k
+noremap <C-j> <C-w>j
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+noremap s <nop>
 noremap ss :vsplit<CR>
 noremap sd :split<CR>
 noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 noremap sj :set splitbelow<CR>:split<CR>
 noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap sl :set splitright<CR>:vsplit<CR>
-
-" Resize splits with arrow keys
-noremap <up> :res +5<CR>
-noremap <down> :res -5<CR>
-noremap <left> :vertical resize-5<CR>
-noremap <right> :vertical resize+5<CR>
-
+noremap so <C-w>o
 " Place the two screens up and down
 noremap su <C-w>t<C-w>K
 " Place the two screens side by side
 noremap sv <C-w>t<C-w>H
+
+" Resize splits with arrow keys
+noremap <C-up> :res +5<CR>
+noremap <C-down> :res -5<CR>
+noremap <C-left> :vertical resize-5<CR>
+noremap <C-right> :vertical resize+5<CR>
+
+" ================
+" Buffer Management
+" ================
+
+noremap <M-h> :be<CR>
+noremap <M-l> :bn<CR>
+noremap <M-p> :b#<CR>
+
+" ================
+" Tab Management
+" ================
 
 " Create a new tab with tu
 noremap tt :tabe<CR>
@@ -113,3 +139,28 @@ autocmd! TabLeave * let g:Lasttab_backup = g:Lasttab | let g:Lasttab = tabpagenr
 autocmd! TabClosed * let g:Lasttab = g:Lasttab_backup
 noremap <LEADER>t :exe "tabn " . g:Lasttab<cr>
 
+" ================
+" Miscellaneous
+" ================
+
+" Input method auto switching
+
+let g:ImSelectPath = 'C:\\im-select\\im-select.exe'
+let g:DefaultCode = 1033
+let g:InputMethodCode = g:DefaultCode
+
+function! SwitchInputMethodToDefault()
+    let g:InputMethodCode = system(g:ImSelectPath)
+    if g:InputMethodCode != g:DefaultCode
+        silent exe '!'.g:ImSelectPath g:DefaultCode
+    endif
+endfunction
+
+function! SwitchInputMethodBack()
+    if g:InputMethodCode != g:DefaultCode
+        silent exe '!'.g:ImSelectPath g:InputMethodCode
+    endif
+endfunction
+
+" autocmd InsertLeave * :call SwitchInputMethodToDefault()
+" autocmd InsertEnter * :call SwitchInputMethodBack()
