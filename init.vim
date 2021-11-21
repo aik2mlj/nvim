@@ -77,6 +77,8 @@ nnoremap <M-j> :m .+1<CR>==
 nnoremap <M-k> :m .-2<CR>==
 inoremap <M-j> <ESC>:m .+1<CR>==gi
 inoremap <M-k> <ESC>:m .-2<CR>==gi
+xnoremap <M-j> :m'>+<CR>==gv
+xnoremap <M-k> :m-2<CR>==gv
 
 " ================
 " Window Management
@@ -113,7 +115,7 @@ noremap <C-right> :vertical resize+5<CR>
 " Buffer Management
 " ================
 
-noremap <M-h> :be<CR>
+noremap <M-h> :bp<CR>
 noremap <M-l> :bn<CR>
 noremap <M-p> :b#<CR>
 
