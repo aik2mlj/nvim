@@ -80,6 +80,12 @@ inoremap <M-k> <ESC>:m .-2<CR>==gi
 xnoremap <M-j> :m'>+<CR>==gv
 xnoremap <M-k> :m-2<CR>==gv
 
+" duplicate lines
+nnoremap <M-J> :t .<CR>
+nnoremap <M-K> :t .-1<CR>
+xnoremap <M-J> :t'><CR>gv
+xnoremap <M-K> :t-1<CR>gv
+
 " ================
 " Window Management
 " ================
@@ -115,9 +121,19 @@ noremap <C-right> :vertical resize+5<CR>
 " Buffer Management
 " ================
 
-noremap <M-h> :bp<CR>
-noremap <M-l> :bn<CR>
-noremap <M-p> :b#<CR>
+nnoremap <M-h> :bp<CR>
+nnoremap <M-l> :bn<CR>
+nnoremap <M-p> :b#<CR>
+nnoremap <M-n> :enew<CR>
+nnoremap <M-q> :bd<CR>
+nnoremap <M-Q> :bd!<CR>
+inoremap <M-h> <ESC>:bp<CR>
+inoremap <M-l> <ESC>:bn<CR>
+inoremap <M-p> <ESC>:b#<CR>
+inoremap <M-n> <ESC>:enew<CR>
+inoremap <M-q> <ESC>:bd<CR>
+inoremap <M-Q> <ESC>:bd!<CR>
+noremap <C-n> :vnew<CR>
 
 " ================
 " Tab Management
