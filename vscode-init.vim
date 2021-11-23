@@ -84,8 +84,14 @@ set virtualedit=block
 set mouse=a
 set clipboard+=unnamedplus
 
-" no highlight
-noremap <LEADER>h :nohls<CR>
+map Q gq
+
+" make Y to copy till the end of the line
+nnoremap Y y$
+
+" Indentation
+nnoremap < <<
+nnoremap > >>
 
 " redo
 nnoremap U <C-r>
@@ -103,6 +109,12 @@ inoremap <M-j> <ESC>:m .+1<CR>==gi
 inoremap <M-k> <ESC>:m .-2<CR>==gi
 xnoremap <M-j> :m'>+<CR>==gv
 xnoremap <M-k> :m-2<CR>==gv
+
+" duplicate lines
+nnoremap <M-J> :t .<CR>
+nnoremap <M-K> :t .-1<CR>
+xnoremap <M-J> :t'><CR>gv
+xnoremap <M-K> :t-1<CR>gv
 
 " ================
 " Window Management

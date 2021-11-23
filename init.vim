@@ -31,20 +31,11 @@ set virtualedit=block
 set mouse=a
 set clipboard+=unnamedplus
 
-map Q gq
-
 " set <LEADER> as <SPACE>
 let mapleader=" "
 
 " open vimrc at any time
 noremap <LEADER>rc :e $MYVIMRC<CR>
-
-" make Y to copy till the end of the line
-nnoremap Y y$
-
-" Indentation
-nnoremap < <<
-nnoremap > >>
 
 " change line color
 hi LineNr ctermfg=grey guifg=grey
@@ -60,6 +51,22 @@ inoremap <C-s> <ESC>:w<CR>
 " no highlight
 noremap <LEADER>h :nohls<CR>
 
+" change join
+noremap <LEADER>j J
+
+" ===========================
+" VSCode Compatiable Settings
+" ===========================
+
+map Q gq
+
+" make Y to copy till the end of the line
+nnoremap Y y$
+
+" Indentation
+nnoremap < <<
+nnoremap > >>
+
 " redo
 nnoremap U <C-r>
 
@@ -68,9 +75,6 @@ noremap <silent> H ^
 noremap <silent> L $
 noremap <silent> J 5j
 noremap <silent> K 5k
-
-" change join
-noremap <LEADER>j J
 
 " exchange lines
 nnoremap <M-j> :m .+1<CR>==
