@@ -1,17 +1,16 @@
 set nu
-set relativenumber
 set hls
 set incsearch
 set smartcase
-set scrolloff=3
+set scrolloff=8
 set visualbell
 set showcmd
 set splitright
 set splitbelow
 set wildmenu
 set shortmess+=c
+set confirm
 " indent settings
-set expandtab
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4
@@ -94,7 +93,7 @@ xnoremap <M-K> :t-1<CR>gv
 " Window Management
 " ================
 
-" Use ; + new arrow keys for moving the cursor around windows
+" Moving the cursor around windows
 noremap <C-f> <C-w>w
 noremap <C-k> <C-w>k
 noremap <C-j> <C-w>j
@@ -184,5 +183,16 @@ function! SwitchInputMethodBack()
     endif
 endfunction
 
+"* Uncomment these two lines to toggle auto switch.
 " autocmd InsertLeave * :call SwitchInputMethodToDefault()
 " autocmd InsertEnter * :call SwitchInputMethodBack()
+
+call plug#begin()
+Plug 'lervag/vimtex'
+call plug#end()
+
+let g:tex_flavor = 'latex'
+" let g:vimtex_quickfix_mode = 0
+let g:vimtex_view_general_viewer = '/mnt/c/Users/ASUS/AppData/Local/SumatraPDF/SumatraPDF.exe'
+let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
